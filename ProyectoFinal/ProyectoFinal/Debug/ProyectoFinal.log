@@ -1,1 +1,69 @@
-﻿  ProyectoFinal.vcxproj -> C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\Debug\ProyectoFinal.exe
+﻿  ProyectoFinal.cpp
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(199,24): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(234,20): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(235,20): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(236,20): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(250,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(251,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(252,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(263,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(264,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(265,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(276,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(277,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(278,21): warning C4244: '=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(491,11): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(492,11): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(496,18): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(497,18): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(499,10): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\ProyectoFinal\ProyectoFinal.cpp(500,10): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+  ProyectoFinal.vcxproj -> C:\Users\Diego Lara\Documents\Escuela\Semestre 8\03 - CGI\Laboratorio\Proyecto Final\Repositorio\316262299_PROYECTO_GPO12\ProyectoFinal\Debug\ProyectoFinal.exe
