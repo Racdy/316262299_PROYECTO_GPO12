@@ -53,10 +53,7 @@ float MovDirZ = -5.0f;
 
 // Positions of the point lights
 glm::vec3 pointLightPositions[] = {
-	glm::vec3(0.0f, 0.0f, 0.0f),
-	glm::vec3(0.0f, 0.0f, 0.0f),
-	glm::vec3(0.0f, 0.0f, 0.0f),
-	glm::vec3(0.0f, 0.0f, 0.0f)
+	glm::vec3(0.0f, 10.0f, 0.0f),
 };
 
 float vertices[] = {
@@ -106,9 +103,7 @@ float vertices[] = {
 
 
 glm::vec3 Light1 = glm::vec3(0);
-glm::vec3 Light2 = glm::vec3(0);
-glm::vec3 Light3 = glm::vec3(0);
-glm::vec3 Light4 = glm::vec3(0);
+
 
 
 // Deltatime
@@ -127,7 +122,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);*/
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Iluminacion 2", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "316262299 - Proyecto Final", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -165,9 +160,18 @@ int main()
 	Shader lightingShader("Shaders/lighting.vs", "Shaders/lighting.frag");
 	Shader lampShader("Shaders/lamp.vs", "Shaders/lamp.frag");
 	
-	Model Base((char*)"Models/CamaProy/Base.obj");
-	Model Cama((char*)"Models/CamaProy/Cama.obj");
-
+	Model Cajonera((char*)"Models/CasaCompleta/Cajonera.obj");
+	Model Cama1Base((char*)"Models/CasaCompleta/Cama1Base.obj");
+	Model Cama1Cama((char*)"Models/CasaCompleta/Cama1Cama.obj");
+	Model Cama2Base((char*)"Models/CasaCompleta/Cama2Base.obj");
+	Model Cama2Cama((char*)"Models/CasaCompleta/Cama2Cama.obj");
+	Model Buffetero((char*)"Models/CasaCompleta/Buffetero.obj");
+	Model Mesa((char*)"Models/CasaCompleta/Mesa.obj");
+	Model Silla1Base((char*)"Models/CasaCompleta/Silla1Base.obj");
+	Model Silla1Silla((char*)"Models/CasaCompleta/Silla1Silla.obj");
+	Model Silla2Base((char*)"Models/CasaCompleta/Silla2Base.obj");
+	Model Silla2Silla((char*)"Models/CasaCompleta/Silla2Silla.obj");
+	Model Fachada1((char*)"Models/CasaCompleta/Trasero_y_lateral.obj");
 
 
 	// First, set the container's VAO (and VBO)
@@ -224,8 +228,8 @@ int main()
 
 		// Directional light
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.direction"), -0.2f, -1.0f, -0.3f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"), 0.1f, 0.1f, 0.1f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 0.1f, 0.1f, 0.1f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"), 0.3f, 0.3f, 0.3f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 0.3f, 0.3f, 0.3f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.specular"), 1.0f, 1.0f, 1.0f);
 
 
@@ -245,45 +249,6 @@ int main()
 		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[0].quadratic"),1.8f);
 
 
-
-		// Point light 2
-		lightColor.x = abs(sin(glfwGetTime() * Light2.x));
-		lightColor.y = abs(sin(glfwGetTime() * Light2.y));
-		lightColor.z = sin(glfwGetTime() * Light2.z);
-
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].position"), pointLightPositions[1].x, pointLightPositions[1].y, pointLightPositions[1].z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].ambient"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].diffuse"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[1].specular"), 1.0f, 1.0f, 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[1].constant"), 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[1].linear"), 0.7f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[1].quadratic"), 1.8f);
-
-		// Point light 3
-		lightColor.x = abs(sin(glfwGetTime() * Light3.x));
-		lightColor.y = abs(sin(glfwGetTime() * Light3.y));
-		lightColor.z = sin(glfwGetTime() * Light3.z);
-
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[2].position"), pointLightPositions[2].x, pointLightPositions[2].y, pointLightPositions[2].z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[2].ambient"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[2].diffuse"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[2].specular"), 1.0f, 1.0f, 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[2].constant"), 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[2].linear"), 0.7f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[2].quadratic"), 1.8f);
-
-		// Point light 4
-		lightColor.x = abs(sin(glfwGetTime() * Light4.x));
-		lightColor.y = abs(sin(glfwGetTime() * Light4.y));
-		lightColor.z = sin(glfwGetTime() * Light4.z);
-
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[3].position"), pointLightPositions[3].x, pointLightPositions[3].y, pointLightPositions[3].z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[3].ambient"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[3].diffuse"), lightColor.x, lightColor.y, lightColor.z);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[3].specular"), 1.0f, 1.0f, 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[3].constant"), 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[3].linear"), 0.7f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "pointLights[3].quadratic"), 1.8f);
 
 		// SpotLight
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"), MovPosX, MovPosY, MovPosZ);
@@ -319,21 +284,86 @@ int main()
 		//Carga de modelo 
         view = camera.GetViewMatrix();	
 
-		////--------------------------------------------------------------------Base ---------------|
+		////--------------------------------------------------------------------Cajonera ---------------|
 
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-	    Base.Draw(lightingShader);
-		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+		Cajonera.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0f, 1.0f, 1.0f, 1.0f);
 
-		////--------------------------------------------------------------------Cama ---------------|
+		////--------------------------------------------------------------------Cama 1 ---------------|
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		Cama.Draw(lightingShader);
+		Cama1Base.Draw(lightingShader);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cama1Cama.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Cama 2 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cama2Base.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cama2Cama.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Buffetero ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Buffetero.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Mesa ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Mesa.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Silla 1 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Silla1Base.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Silla1Silla.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Silla 2 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Silla2Base.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Silla2Silla.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Fachada 1 ---------------|
+		//model = glm::mat4(1);
+		//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		//glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		//Fachada1.Draw(lightingShader);
+		//glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
 		glBindVertexArray(0);
 	
