@@ -171,7 +171,17 @@ int main()
 	Model Silla1Silla((char*)"Models/CasaCompleta/Silla1Silla.obj");
 	Model Silla2Base((char*)"Models/CasaCompleta/Silla2Base.obj");
 	Model Silla2Silla((char*)"Models/CasaCompleta/Silla2Silla.obj");
-	Model Fachada1((char*)"Models/CasaCompleta/Trasero_y_lateral.obj");
+	Model Vaso1((char*)"Models/CasaCompleta/Vaso1.obj");
+	Model Vaso2((char*)"Models/CasaCompleta/Vaso2.obj");
+	Model Jarron1((char*)"Models/CasaCompleta/Jarron1.obj");
+	Model Jarron2((char*)"Models/CasaCompleta/Jarron2.obj");
+	Model Piso1((char*)"Models/CasaCompleta/Piso1.obj");
+	Model Piso2((char*)"Models/CasaCompleta/Piso2.obj");
+	Model Piso3((char*)"Models/CasaCompleta/Piso3.obj");
+	Model Alfombra((char*)"Models/CasaCompleta/Alfombra.obj");
+	Model Muros1((char*)"Models/CasaCompleta/Muros1.obj");
+	Model Muros2((char*)"Models/CasaCompleta/Muros2.obj");
+	Model Techo((char*)"Models/CasaCompleta/Techo.obj");
 
 
 	// First, set the container's VAO (and VBO)
@@ -358,12 +368,82 @@ int main()
 		Silla2Silla.Draw(lightingShader);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
-		////--------------------------------------------------------------------Fachada 1 ---------------|
-		//model = glm::mat4(1);
-		//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		//glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-		//Fachada1.Draw(lightingShader);
-		//glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+		////--------------------------------------------------------------------Vaso 1 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Vaso1.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Vaso 2 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Vaso2.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Jarron 1 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Jarron1.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Jarron 2 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Jarron2.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Piso 1 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Piso1.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Piso 2 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Piso2.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Piso 3 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Piso3.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Alfombra ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Alfombra.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Muros 1 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Muros1.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Muros 2 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Muros2.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Techo ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Techo.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
 		glBindVertexArray(0);
 	
