@@ -7,6 +7,11 @@
 // GLFW
 #include <GLFW/glfw3.h>
 
+// Other includes
+#include "Shader.h"
+#include "Camera.h"
+#include "Model.h"
+
 // Other Libs
 #include "stb_image.h"
 
@@ -18,23 +23,18 @@
 //Load Models
 #include "SOIL2/SOIL2.h"
 
-
-// Other includes
-#include "Shader.h"
-#include "Camera.h"
-#include "Model.h"
-
 // Function prototypes
 void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void MouseCallback(GLFWwindow *window, double xPos, double yPos);
 void DoMovement();
+void RupiaAnim();
 
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Camera
-Camera  camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 GLfloat lastX = WIDTH / 2.0;
 GLfloat lastY = HEIGHT / 2.0;
 bool keys[1024];
@@ -43,17 +43,39 @@ bool firstMouse = true;
 glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 bool active;
 
-float MovPosX = 0.0f;
-float MovPosY = 5.0f;
-float MovPosZ = 0.0f;
+//-------------------------------------------------Declaración de variables para animación--------|
+//--------------------Luz
+bool LuzAnim = false;
+float LuzDirY = 0.0f;
 
-float MovDirX = 0.0f;
-float MovDirY = 5.0f;
-float MovDirZ = -5.0f;
+//-------------------Silla
+bool SillaAnim = false;
+float SillaMov = 0.0f;
+
+//-------------------Cajon
+bool CajonAnim = false;
+float CajonMov = 0.0f;
+
+//------------------Rupia
+glm::vec3 PosIni(0.0f, 0.0f, 0.0f);
+float RupiaMovY = 0.0f;
+float RupiaMovX = 0.0f;
+float RupiaMovX2 = 0.0f;
+float RupiaMovZ = 0.0f;
+float rotKit = 0.0f;
+
+bool RupiaCir = false;
+bool RupiaRec1 = true;
+bool RupiaRec2 = false;
+bool RupiaRec3 = false;
+bool RupiaRec4 = false;
+bool RupiaRec5 = false;
+
+
 
 // Positions of the point lights
 glm::vec3 pointLightPositions[] = {
-	glm::vec3(0.0f, 10.0f, 0.0f),
+	glm::vec3(0.0f, 3.1f, 0.0f),
 };
 
 float vertices[] = {
@@ -160,7 +182,9 @@ int main()
 	Shader lightingShader("Shaders/lighting.vs", "Shaders/lighting.frag");
 	Shader lampShader("Shaders/lamp.vs", "Shaders/lamp.frag");
 	
+	//---------------------------------------------------MUEBLES-----------|
 	Model Cajonera((char*)"Models/CasaCompleta/Cajonera.obj");
+	Model Cajon((char*)"Models/CasaCompleta/Cajon.obj");
 	Model Cama1Base((char*)"Models/CasaCompleta/Cama1Base.obj");
 	Model Cama1Cama((char*)"Models/CasaCompleta/Cama1Cama.obj");
 	Model Cama2Base((char*)"Models/CasaCompleta/Cama2Base.obj");
@@ -175,6 +199,10 @@ int main()
 	Model Vaso2((char*)"Models/CasaCompleta/Vaso2.obj");
 	Model Jarron1((char*)"Models/CasaCompleta/Jarron1.obj");
 	Model Jarron2((char*)"Models/CasaCompleta/Jarron2.obj");
+
+	Model Rupia((char*)"Models/Rupia/Rupia.obj");
+
+	//--------------------------------------------------FACHADA-------------|
 	Model Piso1((char*)"Models/CasaCompleta/Piso1.obj");
 	Model Piso2((char*)"Models/CasaCompleta/Piso2.obj");
 	Model Piso3((char*)"Models/CasaCompleta/Piso3.obj");
@@ -182,6 +210,7 @@ int main()
 	Model Muros1((char*)"Models/CasaCompleta/Muros1.obj");
 	Model Muros2((char*)"Models/CasaCompleta/Muros2.obj");
 	Model Techo((char*)"Models/CasaCompleta/Techo.obj");
+
 
 
 	// First, set the container's VAO (and VBO)
@@ -217,6 +246,7 @@ int main()
 		// Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
 		glfwPollEvents();
 		DoMovement();
+		RupiaAnim();
 
 		// Clear the colorbuffer
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -238,16 +268,16 @@ int main()
 
 		// Directional light
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.direction"), -0.2f, -1.0f, -0.3f);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"), 0.3f, 0.3f, 0.3f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.ambient"), 0.5f, 0.5f, 0.5f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.diffuse"), 0.3f, 0.3f, 0.3f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "dirLight.specular"), 1.0f, 1.0f, 1.0f);
 
 
 		// Point light 1
 	    glm::vec3 lightColor;
-		lightColor.x= abs(sin(glfwGetTime() *Light1.x));
-		lightColor.y= abs(sin(glfwGetTime() *Light1.y));
-		lightColor.z= sin(glfwGetTime() *Light1.z);
+		lightColor.x= 1.0f;
+		lightColor.y= 1.0f;
+		lightColor.z= 0.5;
 
 		
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "pointLights[0].position"), pointLightPositions[0].x, pointLightPositions[0].y, pointLightPositions[0].z);
@@ -261,16 +291,16 @@ int main()
 
 
 		// SpotLight
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"), MovPosX, MovPosY, MovPosZ);
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.direction"), MovDirX, MovDirZ, MovDirZ);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"), 0.0f, 3.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.direction"), 0.0f, LuzDirY, -0.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.ambient"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.diffuse"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.specular"),1.0f, 1.0f, 1.0f);
 		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.constant"), 1.0f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.linear"), 0.35f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.quadratic"), 0.44f);
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
-		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.linear"), 0.3f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.quadratic"), 1.0f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.cutOff"), glm::cos(glm::radians(40.5f)));
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "spotLight.outerCutOff"), glm::cos(glm::radians(42.0f)));
 
 		// Set material properties
 		glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 10.0f);
@@ -300,6 +330,13 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		Cajonera.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0f, 1.0f, 1.0f, 1.0f);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, CajonMov));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cajon.Draw(lightingShader);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0f, 1.0f, 1.0f, 1.0f);
 
 		////--------------------------------------------------------------------Cama 1 ---------------|
@@ -357,12 +394,14 @@ int main()
 
 		////--------------------------------------------------------------------Silla 2 ---------------|
 		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, SillaMov));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		Silla2Base.Draw(lightingShader);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
-		model = glm::mat4(1);
+		model = glm::mat4(1); 
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, SillaMov));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		Silla2Silla.Draw(lightingShader);
@@ -445,6 +484,17 @@ int main()
 		Techo.Draw(lightingShader);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
+		////--------------------------------------------------------------------Rupia ---------------|
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(-2.0f, 0.5f, 3.0f));
+		model = glm::translate(model, glm::vec3(RupiaMovX, RupiaMovY, RupiaMovZ));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(0.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Rupia.Draw(lightingShader);
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
 		glBindVertexArray(0);
 	
 
@@ -463,15 +513,15 @@ int main()
 		model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		// Draw the light object (using light's vertex attributes)
-		for (GLuint i = 0; i < 4; i++)
-		{
+		//for (GLuint i = 0; i < 4; i++)
+		//{
 			model = glm::mat4(1);
-			model = glm::translate(model, pointLightPositions[i]);
+			model = glm::translate(model, pointLightPositions[0]);
 			model = glm::scale(model, glm::vec3(0.2f)); // Make it a smaller cube
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 			glBindVertexArray(VAO);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
+		//}
 		glBindVertexArray(0);
 
 
@@ -520,55 +570,80 @@ void DoMovement()
 
 
 	}
-	//-----------------------------------POSICION---------|
-	if (keys[GLFW_KEY_F])
-	{
-		MovPosX -= 0.01f;
+
+	//-------------------------------------SILLA--------|
+	if (SillaAnim) {
+		if (SillaMov >= -1.0f) {
+			SillaMov -= 0.05f;
+		}
 	}
-	if (keys[GLFW_KEY_H])
-	{
-		MovPosX += 0.01f;
+	else {
+		if (SillaMov <= 0.0f) {
+			SillaMov += 0.05f;
+		}
 	}
-	if (keys[GLFW_KEY_T])
-	{
-		MovPosZ -= 0.01f;
+
+	//-----------------------------------CAJON--------|
+	if (CajonAnim) {
+		if (CajonMov <= 0.5f) {
+			CajonMov += 0.05f;
+		}
 	}
-	if (keys[GLFW_KEY_G])
-	{
-		MovPosZ += 0.01f;
+	else {
+		if (CajonMov >= 0.0f) {
+			CajonMov -= 0.05f;
+		}
 	}
-	if (keys[GLFW_KEY_R])
-	{
-		MovPosY += 0.01f;
+
+	//-----------------------------------RUPIA--------|
+	if (keys[GLFW_KEY_H]) {
+		RupiaCir = true;
+		RupiaRec1 = true;
+		RupiaRec2 = false;
+		RupiaRec3 = false;
+		RupiaRec4 = false;
+		RupiaMovY = 0.0f;
+		RupiaMovX = 0.0f;
+		RupiaMovX2 = 0.0f;
+		RupiaMovZ = 0.0f;
 	}
-	if (keys[GLFW_KEY_Y])
-	{
-		MovPosY -= 0.01f;
-	}
-	//-------------------------------------DIRECCION--------|
-	if (keys[GLFW_KEY_J])
-	{
-		MovDirX -= 0.01f;
-	}
-	if (keys[GLFW_KEY_L])
-	{
-		MovDirX += 0.01f;
-	}
-	if (keys[GLFW_KEY_I])
-	{
-		MovDirZ -= 0.01f;
-	}
-	if (keys[GLFW_KEY_K])
-	{
-		MovDirZ += 0.01f;
-	}
-	if (keys[GLFW_KEY_U])
-	{
-		MovDirY += 0.01f;
-	}
-	if (keys[GLFW_KEY_O])
-	{
-		MovDirY -= 0.01f;
+}
+
+void RupiaAnim() {
+	if (RupiaCir) {
+		rotKit += 45.0f;
+		if (RupiaRec1) {
+			RupiaMovY += 0.05f;
+			if (RupiaMovY > 2.0f) {
+				RupiaRec1 = false;
+				RupiaRec2 = true;
+			}
+		}
+		if (RupiaRec2) {
+			RupiaMovX += 0.05f;
+			RupiaMovZ -= 0.05f;
+			RupiaMovY += 0.05f - (RupiaMovX * RupiaMovX);
+			if (RupiaMovY <= 0.0f) {
+				RupiaMovY = 0.0f;
+				RupiaRec2 = false;
+				RupiaRec3 = true;
+			}
+		}
+
+		if (RupiaRec3) {
+			RupiaMovX += 0.05f;
+			RupiaMovX2 += 0.05f;
+			RupiaMovZ -= 0.05f;
+			RupiaMovY += 0.1f - (RupiaMovX2 * RupiaMovX2);
+			if (RupiaMovY <= 0.0f) {
+				RupiaMovY = 0.0f;
+				RupiaRec3 = false;
+				RupiaRec4 = true;
+			}
+		}
+		if (RupiaRec4) {
+			RupiaRec4 = true;
+		}
 	}
 }
 
@@ -592,6 +667,36 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 		}
 	}
 
+	//-----------------------------------LUZ---------|
+	if (keys[GLFW_KEY_T]) {
+		LuzAnim = !LuzAnim;
+		if (LuzAnim) {
+			LuzDirY = -1.0f;
+		}
+		else {
+			LuzDirY = 0.0f;
+		}
+	}
+	//-----------------------------------Silla--------|
+	if (keys[GLFW_KEY_G]) {
+		if (SillaMov >= -1.0f) {
+			SillaAnim = true;
+		}
+		else {
+			SillaAnim = false;
+
+		}
+	}
+	//-----------------------------------Cajon--------|
+	if (keys[GLFW_KEY_Y]) {
+		if (CajonMov <= 0.5f) {
+			CajonAnim = true;
+		}
+		else {
+			CajonAnim = false;
+
+		}
+	}
 }
 
 void MouseCallback(GLFWwindow *window, double xPos, double yPos)
