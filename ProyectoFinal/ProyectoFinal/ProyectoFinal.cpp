@@ -28,6 +28,7 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
 void MouseCallback(GLFWwindow *window, double xPos, double yPos);
 void DoMovement();
 void RupiaAnim();
+void AlasAnim();
 
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -42,6 +43,8 @@ bool firstMouse = true;
 // Light attributes
 glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 bool active;
+
+float tiempo;
 
 //-------------------------------------------------Declaración de variables para animación--------|
 //--------------------Luz
@@ -69,7 +72,11 @@ bool RupiaRec1 = true;
 bool RupiaRec2 = false;
 bool RupiaRec3 = false;
 bool RupiaRec4 = false;
-bool RupiaRec5 = false;
+
+//-----------------Alas
+bool AlasRot = true;
+float AlasRotDer = 0.0f;
+float AlasRotIzq = 0.0f;
 
 
 
@@ -181,6 +188,7 @@ int main()
 
 	Shader lightingShader("Shaders/lighting.vs", "Shaders/lighting.frag");
 	Shader lampShader("Shaders/lamp.vs", "Shaders/lamp.frag");
+	Shader AnimNavi("Shaders/anim.vs", "Shaders/anim.frag");
 	
 	//---------------------------------------------------MUEBLES-----------|
 	Model Cajonera((char*)"Models/CasaCompleta/Cajonera.obj");
@@ -201,6 +209,12 @@ int main()
 	Model Jarron2((char*)"Models/CasaCompleta/Jarron2.obj");
 
 	Model Rupia((char*)"Models/Rupia/Rupia.obj");
+
+	Model Navi((char*)"Models/Navi/Navi.obj");
+	Model Ala1((char*)"Models/Navi/Ala1.obj");
+	Model Ala2((char*)"Models/Navi/Ala2.obj");
+	Model Ala3((char*)"Models/Navi/Ala3.obj");
+	Model Ala4((char*)"Models/Navi/Ala4.obj");
 
 	//--------------------------------------------------FACHADA-------------|
 	Model Piso1((char*)"Models/CasaCompleta/Piso1.obj");
@@ -247,6 +261,7 @@ int main()
 		glfwPollEvents();
 		DoMovement();
 		RupiaAnim();
+		AlasAnim();
 
 		// Clear the colorbuffer
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -495,6 +510,57 @@ int main()
 		Rupia.Draw(lightingShader);
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
+		////--------------------------------------------------------------------Navi ---------------|
+		AnimNavi.Use();
+		tiempo = glfwGetTime();
+		
+		modelLoc = glGetUniformLocation(AnimNavi.Program, "model");
+		viewLoc = glGetUniformLocation(AnimNavi.Program, "view");
+		projLoc = glGetUniformLocation(AnimNavi.Program, "projection");
+		
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.1f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1f(glGetUniformLocation(AnimNavi.Program, "time"), tiempo);
+		Navi.Draw(lampShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(AlasRotIzq), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(0.1f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1f(glGetUniformLocation(AnimNavi.Program, "time"), tiempo);
+		Ala1.Draw(lampShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(AlasRotDer), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(0.1f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1f(glGetUniformLocation(AnimNavi.Program, "time"), tiempo);
+		Ala2.Draw(lampShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(AlasRotIzq), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(0.1f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1f(glGetUniformLocation(AnimNavi.Program, "time"), tiempo);
+		Ala3.Draw(lampShader);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(AlasRotDer), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(0.1f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1f(glGetUniformLocation(AnimNavi.Program, "time"), tiempo);
+		Ala4.Draw(lampShader);
+
+
 		glBindVertexArray(0);
 	
 
@@ -644,6 +710,22 @@ void RupiaAnim() {
 		if (RupiaRec4) {
 			RupiaRec4 = true;
 		}
+	}
+}
+
+void AlasAnim() {
+
+	if (AlasRot) {
+		AlasRotIzq -= 1.0f;
+		AlasRotDer += 1.0f;
+		if (AlasRotIzq == -30.0f)
+			AlasRot = false;
+	}
+	else {
+		AlasRotIzq += 1.0f;
+		AlasRotDer -= 1.0f;
+		if (AlasRotIzq == 0.0f)
+			AlasRot = true;
 	}
 }
 
