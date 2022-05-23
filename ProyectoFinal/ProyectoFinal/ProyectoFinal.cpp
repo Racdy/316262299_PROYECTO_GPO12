@@ -175,6 +175,7 @@ int main()
 	
 	// Definición y carga de modelos
 	//---------------------------------------------------MUEBLES-----------|
+	// --------------------------------------------------PLANTA BAJA-------|
 	//Se crean objetos de tipo MODEL que permite cargar los modelos que se crearon en Maya y traerlos a OpenGL
 	Model Cajonera((char*)"Models/CasaCompleta/Cajonera.obj");		//Se define el modelo de la CAJONERA
 	Model Cajon((char*)"Models/CasaCompleta/Cajon.obj");			//Se define el modelo del CAJÓN
@@ -201,14 +202,32 @@ int main()
 	Model Ala3((char*)"Models/Navi/Ala3.obj");						//Se define el modelo de al ALA inferior derecha
 	Model Ala4((char*)"Models/Navi/Ala4.obj");						//Se define el modelo de al ALA inferior izquierda
 
+	// --------------------------------------------------PRIMER PISO-------|
+	
+	Model CajoneraSUP((char*)"Models/CasaCompleta/CajoneraSUP.obj");//Se define el modelo de la CAJONERA
+	Model CajonSUP((char*)"Models/CasaCompleta/CajonSUP.obj");		//Se define el modelo del CAJÓN
+	Model Telefono((char*)"Models/CasaCompleta/Telefono.obj");		//Se define el modelo del TELEFONO
+	Model Repisa((char*)"Models/CasaCompleta/Repisa.obj");			//Se define el modelo de la REPISA
+	Model Cama3Base((char*)"Models/CasaCompleta/Cama3Base.obj");	//Se define el modelo de la base de la CAMA 3
+	Model Cama3Cama((char*)"Models/CasaCompleta/Cama3Cama.obj");	//Se define el modelo de el cochon y almohada de la CAMA 3
+	Model Cama4Base((char*)"Models/CasaCompleta/Cama4Base.obj");	//Se define el modelo de la base de la CAMA 4
+	Model Cama4Cama((char*)"Models/CasaCompleta/Cama4Cama.obj");	//Se define el modelo de el cochon y almohada de la CAMA 4
+	Model MesaSUP1((char*)"Models/CasaCompleta/MesaSUP1.obj");		//Se define el modelo de la MESA 1
+	Model MesaSUP2((char*)"Models/CasaCompleta/MesaSUP2.obj");		//Se define el modelo de la MESA 2
+	Model Jarron3((char*)"Models/CasaCompleta/Jarron3.obj");		//Se define el modelo del JARRÓN 3
+	Model Jarron4((char*)"Models/CasaCompleta/Jarron4.obj");		//Se define el modelo del JARRÓN 4
+
 	//--------------------------------------------------FACHADA-------------|
 	Model Piso1((char*)"Models/CasaCompleta/Piso1.obj");			//Se define el modelo del PISO (MADERA) 
 	Model Piso2((char*)"Models/CasaCompleta/Piso2.obj");			//Se define el modelo del PISO (MARCO DE PIEDRA)
 	Model Piso3((char*)"Models/CasaCompleta/Piso3.obj");			//Se define el modelo del PISO (RAMPA DE METAL)
+	Model Piso4((char*)"Models/CasaCompleta/Piso4.obj");			//Se define el modelo del PISO (PRIMER PISO) (MADERA) 
+	Model Piso5((char*)"Models/CasaCompleta/Piso5.obj");			//Se define el modelo del PISO (PRIMER PISO) (MARCO DE PIEDRA)
 	Model Alfombra((char*)"Models/CasaCompleta/Alfombra.obj");		//Se define el modelo de la ALFOMBRA
 	Model Muros1((char*)"Models/CasaCompleta/Muros1.obj");			//Se define el modelo de los MUROS (LATERALES Y TRASERO)
 	Model Muros2((char*)"Models/CasaCompleta/Muros2.obj");			//Se define el modelo de los MUROS (FRENTE)
 	Model Techo((char*)"Models/CasaCompleta/Techo.obj");			//Se define el modelo del TECHO
+	Model Escalera((char*)"Models/CasaCompleta/Escalera.obj");			//Se define el modelo del ESCALERA
 
 	// Se configura el VAO del contenedor así como del VBO
 	GLuint VBO, VAO;
@@ -342,6 +361,20 @@ int main()
 		Cajon.Draw(lightingShader);		//Se dibuja el Cajón
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0f, 1.0f, 1.0f, 1.0f);
 
+		////--------------------------------------------------------------------Cajonera SUP---------------|
+		model = glm::mat4(1);							
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0); 
+		CajoneraSUP.Draw(lightingShader); //Se dibuja el Cuerpo de la cajonera SUP
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0f, 1.0f, 1.0f, 1.0f);
+
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, CajonMov));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		CajonSUP.Draw(lightingShader);		//Se dibuja el Cajón SUP
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0f, 1.0f, 1.0f, 1.0f);
+
 		////--------------------------------------------------------------------Cama 1 ---------------|
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -368,6 +401,32 @@ int main()
 		Cama2Cama.Draw(lightingShader);	//Se dibuja el Colchón y almohada de la Cama 2
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
+		////--------------------------------------------------------------------Cama 3 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cama3Base.Draw(lightingShader);	//Se dibuja la Base de la Cama 3
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cama3Cama.Draw(lightingShader);	//Se dibuja el Colchón y almohada de la Cama 3
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Cama 4 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cama4Base.Draw(lightingShader);	//Se dibuja la Base de la Cama 4
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Cama4Cama.Draw(lightingShader);	//Se dibuja el Colchón y almohada de la Cama 4
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
 		////--------------------------------------------------------------------Buffetero ---------------|
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -375,11 +434,39 @@ int main()
 		Buffetero.Draw(lightingShader);	//Se dibuja el Buffetero
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
+		////--------------------------------------------------------------------TELEFONO ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Telefono.Draw(lightingShader);	//Se dibuja el Telefono
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------REPISA ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Repisa.Draw(lightingShader);	//Se dibuja el la repisa
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
 		////--------------------------------------------------------------------Mesa ---------------|
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		Mesa.Draw(lightingShader);		//Se dibuja la Mesa
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Mesa SUP 1---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		MesaSUP1.Draw(lightingShader);		//Se dibuja la Mesa SUP1
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Mesa SUP 2---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		MesaSUP2.Draw(lightingShader);		//Se dibuja la Mesa SUP2
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
 		////--------------------------------------------------------------------Silla 1 ---------------|
@@ -438,6 +525,20 @@ int main()
 		Jarron2.Draw(lightingShader);	//Se dibuja el Jarrón 2
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
+		////--------------------------------------------------------------------Jarron 3 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Jarron3.Draw(lightingShader);	//Se dibuja el Jarrón 3
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Jarron 4 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Jarron4.Draw(lightingShader);	//Se dibuja el Jarrón 4
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
 		////--------------------------------------------------------------------Piso 1 ---------------|
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -459,11 +560,31 @@ int main()
 		Piso3.Draw(lightingShader);		//Se dibuja la tercera parte del piso (rampa de metal)
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
+		////--------------------------------------------------------------------Piso 4 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Piso4.Draw(lightingShader);		//Se dibuja la primera parte del piso SUP (Madera)
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Piso 5 ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Piso5.Draw(lightingShader);		//Se dibuja la segunda parte del piso SUP (marco de piedra)
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 		////--------------------------------------------------------------------Alfombra ---------------|
 		model = glm::mat4(1);
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
 		Alfombra.Draw(lightingShader);	//Se dibuja la Alfombra
+		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
+
+		////--------------------------------------------------------------------Escalera ---------------|
+		model = glm::mat4(1);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glUniform1i(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
+		Escalera.Draw(lightingShader);	//Se dibuja la Escalera
 		glUniform4f(glGetUniformLocation(lightingShader.Program, "colorAlpha"), 1.0, 1.0, 1.0, 1.0);
 
 		////--------------------------------------------------------------------Muros 1 ---------------|
