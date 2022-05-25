@@ -19,40 +19,54 @@ Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd Palo.png
 Ni 1.00
-newmtl Cajonera_lambert2SG2
+newmtl Cajonera_Cajon_lambert4SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Madera1_Cajonera.jpg
+map_Kd Madera2_Cajonera.png
 Ni 1.00
-newmtl Cajonera_lambert3SG2
+newmtl Cajonera_Cajon_lambert5SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Madera2_Cajonera.jpg
+map_Kd Madera3_Cajonera.png
 Ni 1.00
-newmtl Cajonera_lambert4SG2
+newmtl Cajonera_lambert2SG3
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Madera3_Cajonera.jpg
+map_Kd Madera1_Cajonera.png
 Ni 1.00
-newmtl Cajonera_lambert5SG
+newmtl Cajonera_lambert3SG3
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Madera4_Cajonera.jpg
+map_Kd Madera2_Cajonera.png
 Ni 1.00
-newmtl Cajonera_lambert6SG
+newmtl Cajonera_lambert4SG3
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Madera5_Cajonera.jpg
+map_Kd Madera2_Cajonera.png
+Ni 1.00
+newmtl Cajonera_lambert5SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera3_Cajonera.png
+Ni 1.00
+newmtl Cajonera_lambert6SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera1_Cajonera.png
 Ni 1.00
 newmtl Cama_lambert2SG2
 illum 4
@@ -98,6 +112,60 @@ Ni 1.00
 Ks 0.00 0.00 0.00
 map_Ks JarronS.png
 Ns 18.00
+newmtl MesaA_phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera1_MesaA.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks MesaAS1.png
+Ns 18.00
+newmtl MesaA_phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera2_MesaA.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks MesaAS2.png
+Ns 18.00
+newmtl MesaNew_lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Mesa.png
+Ni 1.00
+newmtl MesaNew_lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Mesa1.png
+Ni 1.00
+newmtl Repisa_phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Repisa1.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Repisa1S.png
+Ns 18.00
+newmtl Repisa_phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Repisa2.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Repisa2S.png
+Ns 18.00
 newmtl Silla_lambert2SG
 illum 4
 Kd 0.00 0.00 0.00
@@ -112,6 +180,43 @@ Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd Madera1_Silla.jpg
 Ni 1.00
+newmtl Telefono_lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Telefono2.png
+Ni 1.00
+newmtl Telefono_phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Rueda2.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Rueda2S.png
+Ns 18.00
+newmtl Telefono_phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Telefono.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks TelefonoS.png
+Ns 18.00
+newmtl Telefono_phong3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Rueda1.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Rueda1S.png
+Ns 18.00
 newmtl Vaso_phong1SG
 illum 4
 Kd 0.00 0.00 0.00
@@ -177,19 +282,19 @@ Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd Tapete.png
 Ni 1.00
-newmtl pasted__Cajonera_lambert5SG
+newmtl lambert25SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Madera4_Cajonera.jpg
+map_Kd Madera3_Cajonera.png
 Ni 1.00
-newmtl pasted__Cajonera_lambert6SG
+newmtl lambert26SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Madera5_Cajonera.jpg
+map_Kd Cobija1.png
 Ni 1.00
 newmtl pasted__Cama_phong1SG
 illum 4
@@ -211,48 +316,6 @@ Ni 1.00
 Ks 0.00 0.00 0.00
 map_Ks Madera2S_Cama.png
 Ns 18.00
-newmtl pasted__Mesa_lambert9SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Madera1_Mesa.jpg
-Ni 1.00
-newmtl pasted__Mesa_lambert10SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Madera2_Mesa.jpg
-Ni 1.00
-newmtl pasted__Mesa_lambert11SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Madera2_Mesa.jpg
-Ni 1.00
-newmtl pasted__Mesa_lambert12SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Madera3_Mesa.jpg
-Ni 1.00
-newmtl pasted__Mesa_lambert13SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Madera4_Mesa.jpg
-Ni 1.00
-newmtl pasted__Mesa_lambert14SG2
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd Madera4_Mesa.jpg
-Ni 1.00
 newmtl pasted__Silla_lambert2SG
 illum 4
 Kd 0.00 0.00 0.00
@@ -432,4 +495,14 @@ map_Kd Piso2.png
 Ni 1.00
 Ks 0.00 0.00 0.00
 map_Ks Piso2S.png
+Ns 18.00
+newmtl phong10SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piso3.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Piso3S.png
 Ns 18.00

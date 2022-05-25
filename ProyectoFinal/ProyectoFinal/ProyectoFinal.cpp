@@ -78,7 +78,7 @@ float AlasRotIzq = 0.0f;	////Giran las alas izquierdas de Navi en dirección de Y
 
 // Posicion de la Point Light
 glm::vec3 pointLightPositions[] = {
-	glm::vec3(0.0f, 3.1f, 0.0f),
+	glm::vec3(0.0f, 5.9f, 0.0f),
 };
 
 
@@ -312,7 +312,7 @@ int main()
 
 		// Configuración de SpotLight. Donde se configura la posición, dirección, la componente ambiental, difusa, especular,
 		// constante (no se modifica), lineal, cuadratica, el angulo cutOff y el angulo outerCutOff 
-		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"), 0.0f, 3.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.position"), 0.0f, 6.0f, 0.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.direction"), 0.0f, LuzDirY, -0.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.ambient"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "spotLight.diffuse"), 1.0f, 1.0f, 1.0f);
@@ -638,7 +638,7 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));	//Se establece la posición de Navi
+		model = glm::translate(model, glm::vec3(0.0f, 5.5f, 0.0f));	//Se establece la posición de Navi
 		model = glm::scale(model, glm::vec3(0.1f));					//Se escala en 0.1 
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glUniform1f(glGetUniformLocation(AnimNavi.Program, "time"), tiempo); //Se manda la variable tiempo a anim.vs para obtener 
@@ -646,7 +646,7 @@ int main()
 		Navi.Draw(lampShader);			//Se dibuja Navi 
 
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 5.5f, 0.0f));
 		model = glm::rotate(model, glm::radians(AlasRotIzq), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(0.1f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -654,7 +654,7 @@ int main()
 		Ala1.Draw(lampShader);			//Se dibuja la ala izquierda superior
 
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 5.5f, 0.0f));
 		model = glm::rotate(model, glm::radians(AlasRotDer), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(0.1f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -662,7 +662,7 @@ int main()
 		Ala2.Draw(lampShader);			//Se dibuja la ala derecha superior
 
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 5.5f, 0.0f));
 		model = glm::rotate(model, glm::radians(AlasRotIzq), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(0.1f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -670,7 +670,7 @@ int main()
 		Ala3.Draw(lampShader);			//Se dibuja la ala izquierda inferior
 
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 5.5f, 0.0f));
 		model = glm::rotate(model, glm::radians(AlasRotDer), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(0.1f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -793,11 +793,11 @@ void RupiaAnim() {
 	
 	// Recorridos para a seguir para animación de rebote de rupia
 	if (RupiaCir) {			//Cuando se presione la tecla 'H' se activa/desactiva la animación
-		rotKit += 45.0f;	//La variable se encarga de rotar 45 grados de manera infinita
+		rotKit += 10.0f;	//La variable se encarga de rotar 45 grados de manera infinita
 		
 		//La rupia se traslada hasta que llegue al valor de 2.0f en Y
 		if (RupiaRec1) {
-			RupiaMovY += 0.05f;
+			RupiaMovY += 0.03f;
 			if (RupiaMovY > 2.0f) {
 				RupiaRec1 = false;
 				RupiaRec2 = true;
@@ -808,8 +808,8 @@ void RupiaAnim() {
 		//ambas variables
 		//Parabola: f(x) = 0.05 - x^2  
 		if (RupiaRec2) {
-			RupiaMovX += 0.05f;
-			RupiaMovZ -= 0.05f;
+			RupiaMovX += 0.03f;
+			RupiaMovZ -= 0.03f;
 			RupiaMovY += 0.05f - (RupiaMovX * RupiaMovX);	//La función se suma así misma para darle el efecto de rebote
 			if (RupiaMovY <= 0.0f) {
 				RupiaMovY = 0.0f;
@@ -822,9 +822,9 @@ void RupiaAnim() {
 		//para el calculo de la parabola, pero sin afectar RupiaMovX de su posición  
 		//Parabola: g(x) = 0.1f - x^2
 		if (RupiaRec3) {
-			RupiaMovX += 0.05f;
-			RupiaMovX2 += 0.05f;
-			RupiaMovZ -= 0.05f;
+			RupiaMovX += 0.03f;
+			RupiaMovX2 += 0.03f;
+			RupiaMovZ -= 0.03f;
 			RupiaMovY += 0.1f - (RupiaMovX2 * RupiaMovX2); //La función se suma así misma para darle el efecto de rebote
 			if (RupiaMovY <= 0.0f) {
 				RupiaMovY = 0.0f;
